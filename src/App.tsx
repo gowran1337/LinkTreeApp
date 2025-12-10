@@ -7,21 +7,22 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/admin-login" element={<AdminLogin />} />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <Admin />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/:slug" element={<UserDetail />} />
-        <Route path="/" element={<div>Home</div>} />
-      </Routes>
-    </Router>
+   <Router>
+  <Routes>
+    <Route path="/admin-login" element={<AdminLogin />} />
+    <Route
+      path="/admin"
+      element={
+        <ProtectedRoute>
+          <Admin />
+        </ProtectedRoute>
+      }
+    />
+    <Route path="/:slug" element={<UserDetail />} />
+    <Route path="/" element={<div>Home</div>} />
+  </Routes>
+</Router>
+
   );
 }
 
