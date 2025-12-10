@@ -21,7 +21,7 @@ html, body {
   max-width: var(--max-width);
   width: 100%;
   margin: 0 auto;
-  padding: calc(var(--spacing) + 20px) var(--spacing) var(--spacing); 
+  padding: calc(var(--spacing) + 5px) var(--spacing) var(--spacing); 
   /* ^ Increased top padding so profile pic starts lower */
   padding-bottom: calc(var(--spacing) + env(safe-area-inset-bottom));
   background-color: #002b52;
@@ -38,7 +38,7 @@ html, body {
   max-height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  margin: 0 auto 24px; /* more spacing below */
+  margin: 0 auto 12px; /* more spacing below */
   border: 3px solid #fff;
   display: block;
 }
@@ -46,7 +46,7 @@ html, body {
 /* TEXT */
 h1 {
   font-size: clamp(1.4rem, 5vw, 1.8rem);
-  margin-bottom: 6px;
+  margin-bottom: 3px;
 }
 
 h2 {
@@ -60,8 +60,8 @@ h2 {
 .contact-buttons {
   display: flex;
   flex-direction: column;
-  gap: 16px; /* taller spacing between items */
-  margin-top: 24px;
+  gap: 13px; /* taller spacing between items */
+  margin-top: 2px;
 }
 
 /* CONTACT CARD BUTTONS */
@@ -73,7 +73,7 @@ h2 {
   background-color: #005799;
   color: white;
   text-decoration: none;
-  padding: 18px 18px;                        /* taller buttons */
+  padding: 12px 18px;                        /* taller buttons */
   border-radius: 0.7rem;
   font-size: clamp(1rem, 4vw, 1.1rem);       /* slightly bigger text */
   justify-content: flex-start;
@@ -144,7 +144,7 @@ h2 {
 
 
 .footer {
-  margin-top: 50px; /* more separation from above content */
+  margin-top: 40px; /* more separation from above content */
   padding: 24px 0 28px;
   text-align: center;
   color: #d0d6e1;
