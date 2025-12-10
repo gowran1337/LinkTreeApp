@@ -4,6 +4,7 @@
   --radius-large: 20px;
   --radius-medium: 12px;
   --spacing: 24px; /* slightly increased for nicer spacing */
+  
 }
 
 /* Prevent horizontal scroll */
@@ -12,6 +13,7 @@ html, body {
   overflow-x: hidden;
   font-family: "CoolFont1";
   font-size: 1.225rem;
+
 }
 
 /* MAIN CONTAINER */
@@ -72,7 +74,7 @@ h2 {
   color: white;
   text-decoration: none;
   padding: 18px 18px;                        /* taller buttons */
-  border-radius: var(--radius-medium);
+  border-radius: 0.7rem;
   font-size: clamp(1rem, 4vw, 1.1rem);       /* slightly bigger text */
   justify-content: flex-start;
   box-sizing: border-box;
@@ -83,7 +85,7 @@ h2 {
   width: clamp(32px, 12vw, 48px);
   height: clamp(32px, 12vw, 58px);
   flex-shrink: 0;
-  border-radius: 1vw;
+  border-radius: 2vw;
 }
 
 .admin-button {
@@ -123,6 +125,20 @@ h2 {
   word-break: break-word;
 }
 
+.contact-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* pushes arrow to the right */
+  padding: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.arrow {
+  width: 1rem;   /* adjust size */
+  height: 1rem;
+  margin-left: auto;
+}
 
 
 

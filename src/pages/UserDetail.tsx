@@ -4,12 +4,13 @@ import "./UserDetail.css";
 import Footer from "../components/Footer";
 import { supabase } from "../supabaseClient";
 
-
+// ✅ Import icons
 import emailIcon from "../assets/email.svg";
 import phoneIcon from "../assets/phone.svg";
 import linkedinIcon from "../assets/linkedin.svg";
 import webIcon from "../assets/web.svg";
 import youtubeIcon from "../assets/youtube.svg";
+import arrowIcon from "../assets/arrow.svg"; // <-- new arrow image
 
 interface User {
   id?: number;
@@ -60,49 +61,46 @@ const UserDetail: React.FC = () => {
 
       <div className="contact-buttons">
         {/* Email */}
-        <a href={`mailto:${user.email}`}>
+        <a href={`mailto:${user.email}`} className="contact-button">
           <img src={emailIcon} alt="Email" className="icon" />
           <div className="info-inline">
             <p className="info-label">E-mail</p>
             <p className="info-value">{user.email}</p>
           </div>
+          <img src={arrowIcon} alt="Arrow" className="arrow" />
         </a>
 
         {/* Phone */}
-        <a href={`tel:${user.phone}`}>
+        <a href={`tel:${user.phone}`} className="contact-button">
           <img src={phoneIcon} alt="Phone" className="icon" />
           <div className="info-inline">
             <p className="info-label">Phone</p>
             <p className="info-value">{user.phone}</p>
           </div>
+          <img src={arrowIcon} alt="Arrow" className="arrow" />
         </a>
 
         {/* LinkedIn */}
         {user.linkedinURL && (
-          <a href={user.linkedinURL} target="_blank" rel="noopener noreferrer">
+          <a href={user.linkedinURL} target="_blank" rel="noopener noreferrer" className="contact-button">
             <img src={linkedinIcon} alt="LinkedIn" className="icon" />
             <span>Visit my LinkedIn</span>
+            <img src={arrowIcon} alt="Arrow" className="arrow" />
           </a>
         )}
 
         {/* Website */}
-        <a
-          href="https://chris-marine.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://chris-marine.com/" target="_blank" rel="noopener noreferrer" className="contact-button">
           <img src={webIcon} alt="Website" className="icon" />
           <span>Visit our Website</span>
+          <img src={arrowIcon} alt="Arrow" className="arrow" />
         </a>
 
         {/* YouTube */}
-        <a
-          href="https://www.youtube.com/@ChrisMarineAB"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://www.youtube.com/@ChrisMarineAB" target="_blank" rel="noopener noreferrer" className="contact-button">
           <img src={youtubeIcon} alt="YouTube" className="icon" />
           <span>Watch our YouTube</span>
+          <img src={arrowIcon} alt="Arrow" className="arrow" />
         </a>
       </div>
 
