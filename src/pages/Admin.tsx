@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../supabaseClient"; // make sure you created this
 import "./Admin.css";
 
 interface User {
@@ -23,14 +24,23 @@ const Admin: React.FC = () => {
     profileImage: "",
     linkedinURL: ""
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
-  // Load users
+  // Load users from Supabase
   useEffect(() => {
-    fetch("http://localhost:3000/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
+    const fetchUsers = async () => {
+      const { data, error } = await supabase.from("users").select("*");
+      if (error) {
+        setError(error.message);
+      } else {
+        setUsers(data || []);
+      }
+      setLoading(false);
+    };
+    fetchUsers();
   }, []);
 
   // Handle form input
@@ -39,38 +49,43 @@ const Admin: React.FC = () => {
   };
 
   // Handle add/update
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const slug = form.name.toLowerCase().replace(/\s+/g, "-");
     const updatedUser = { ...form, slug };
 
-    if (form.id) {
-      // Update existing user
-      fetch(`http://localhost:3000/users/${form.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedUser),
-      }).then(() => {
-        resetForm();
-        window.location.reload();
-      });
-    } else {
-      // Create new user
-      fetch("http://localhost:3000/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedUser),
-      }).then(() => {
-        resetForm();
-        window.location.reload();
-      });
+    try {
+      if (form.id) {
+        // Update existing user
+        const { error } = await supabase
+          .from("users")
+          .update(updatedUser)
+          .eq("id", form.id);
+        if (error) throw error;
+        setUsers(users.map((u) => (u.id === form.id ? updatedUser : u)));
+      } else {
+        // Create new user
+        const { data, error } = await supabase
+          .from("users")
+          .insert([updatedUser])
+          .select();
+        if (error) throw error;
+        if (data) setUsers([...users, data[0]]);
+      }
+      resetForm();
+    } catch (err: any) {
+      setError(err.message);
     }
   };
 
   // Handle delete
-  const handleDelete = (id: number) => {
-    fetch(`http://localhost:3000/users/${id}`, {
-      method: "DELETE",
-    }).then(() => window.location.reload());
+  const handleDelete = async (id: number) => {
+    try {
+      const { error } = await supabase.from("users").delete().eq("id", id);
+      if (error) throw error;
+      setUsers(users.filter((u) => u.id !== id));
+    } catch (err: any) {
+      setError(err.message);
+    }
   };
 
   // Load user into form for editing
@@ -89,6 +104,9 @@ const Admin: React.FC = () => {
       linkedinURL: ""
     });
   };
+
+  if (loading) return <div className="container">Loading users…</div>;
+  if (error) return <div className="container">Error: {error}</div>;
 
   return (
     <div className="container">
