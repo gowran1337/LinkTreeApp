@@ -159,6 +159,6 @@ h2 {
 .footer-logo {
   display: block;
   margin: 0 auto;
-  width: clamp(90px, 35vw, 180px); /* bigger responsive logo */
+  width: clamp(90px, 45vw, 180px); /* bigger responsive logo */
   height: auto;
 }
