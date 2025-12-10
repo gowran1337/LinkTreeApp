@@ -71,14 +71,16 @@ const UserDetail: React.FC = () => {
         </a>
 
         {/* Phone */}
-        <a href={`tel:${user.phone}`} className="contact-button">
-          <img src={phoneIcon} alt="Phone" className="icon" />
-          <div className="info-inline">
-            <p className="info-label">Phone</p>
-            <p className="info-value">{user.phone}</p>
-          </div>
-          <img src={arrowIcon} alt="Arrow" className="arrow" />
-        </a>
+      {/* Phone */}
+<a href={`sms:${user.phone}`} className="contact-button">
+  <img src={phoneIcon} alt="Phone" className="icon" />
+  <div className="info-inline">
+    <p className="info-label">Phone</p>
+    <p>{user.phone}</p>
+  </div>
+  <img src={arrowIcon} alt="Arrow" className="arrow" />
+</a>
+
 
         {/* LinkedIn */}
         {user.linkedinURL && (

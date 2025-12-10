@@ -90,9 +90,10 @@ const Admin: React.FC = () => {
 
   // Load user into form for editing
   const handleEdit = (user: User) => {
-    setForm(user);
-  };
-
+  setForm(user);
+  // ✅ Scroll to top when editing
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
   // Reset form
   const resetForm = () => {
     setForm({
@@ -171,23 +172,21 @@ const Admin: React.FC = () => {
 
       {/* User list */}
       <div className="user-list">
-        {users.map((user) => (
-          <div key={user.id} className="user-card">
-            <h2>{user.name}</h2>
-            <p>{user.title}</p>
-            <p>{user.email}</p>
-            <p>{user.phone}</p>
+  {users.map((user) => (
+    <div key={user.id} className="user-card">
+      {/* ✅ Only show the name */}
+      <h2>{user.name}</h2>
 
-            <div style={{ display: "flex", gap: "8px", marginTop: "10px" }}>
-              <button onClick={() => navigate(`/${user.slug}`)}>
-                View Profile
-              </button>
-              <button onClick={() => handleEdit(user)}>Edit</button>
-              <button onClick={() => handleDelete(user.id!)}>Delete</button>
-            </div>
-          </div>
-        ))}
+      <div style={{ display: "flex", gap: "8px", marginTop: "10px" }}>
+        <button onClick={() => navigate(`/${user.slug}`)}>
+          View Profile
+        </button>
+        <button onClick={() => handleEdit(user)}>Edit</button>
+        <button onClick={() => handleDelete(user.id!)}>Delete</button>
       </div>
+    </div>
+  ))}
+</div>
       
     </div>
   );
