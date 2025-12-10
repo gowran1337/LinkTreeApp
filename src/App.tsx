@@ -7,8 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-   <Router basename="/LinkTreeApp/">
-
+    <Router>
       <Routes>
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route
