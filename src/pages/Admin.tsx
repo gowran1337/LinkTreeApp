@@ -111,7 +111,14 @@ const Admin: React.FC = () => {
   return (
     <div className="container">
       <h1>Admin Portal</h1>
-
+   <button
+  onClick={async () => {
+    await supabase.auth.signOut();
+    navigate("/admin-login");
+  }}
+>
+  Logout
+</button>
       {/* Form */}
       <div className="form">
         <input
@@ -181,6 +188,7 @@ const Admin: React.FC = () => {
           </div>
         ))}
       </div>
+      
     </div>
   );
 };

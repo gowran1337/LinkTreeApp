@@ -39,14 +39,7 @@ const AdminLogin: React.FC = () => {
       <button onClick={handleLogin}>Login</button>
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <button
-  onClick={async () => {
-    await supabase.auth.signOut();
-    navigate("/admin-login");
-  }}
->
-  Logout
-</button>
+   
 
     </div>
 

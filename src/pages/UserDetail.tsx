@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./UserDetail.css";
 import Footer from "../components/Footer";
-
+import { supabase } from "../supabaseClient"; 
 interface User {
   id?: number;
   name: string;
@@ -19,12 +19,23 @@ const UserDetail: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch(`http://localhost:3000/users?slug=${slug}`)
-      .then((res) => res.json())
-      .then((data) => setUser(data[0]));
-  }, [slug]);
+useEffect(() => {
+    const fetchUser = async () => {
+      if (!slug) return;
+      const { data, error } = await supabase
+        .from("users")
+        .select("*")
+        .eq("slug", slug)
+        .single(); // expect one row
 
+      if (error) {
+      } else {
+        setUser(data);
+      }
+    };
+
+    fetchUser();
+  }, [slug]);
   if (!user) return <div className="container">Loading...</div>;
 
   return (
@@ -89,12 +100,7 @@ const UserDetail: React.FC = () => {
  
 
 
-      <button
-        className="admin-button"
-        onClick={() => navigate("/admin")}
-      >
-        Admin 
-      </button>
+      
     </div>
   );
 };
